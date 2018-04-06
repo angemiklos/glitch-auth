@@ -1,5 +1,5 @@
 {
-	"name": "",
+	"name": "challenge-gate-keeper-middleware",
 	"version": "0.0.1",
 	"description": "",
 	"main": "server.js",
@@ -8,7 +8,8 @@
 	},
 	"dependencies": {
 		"express": "^4.12.4",
-		"morgan": "^1.7.0"
+		"morgan": "^1.7.0",
+    "query-string": "^4.3.4"
 	},
 	"repository": {
 		"type": "git",

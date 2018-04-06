@@ -31,13 +31,25 @@ const USERS = [
 ];
 
 function gateKeeper(req, res, next) {
-  // your code should replace the line below
+  
+  const header = queryString.parse(req.get('x-username-and-password'));
+  const user = header.user || null;
+  const pass = header.pass || null;
+  console.log("user is: " + user);
+  console.log("pass is: " + pass);
+
+  req.user = USERS.find(
+    (usr, index) => usr.userName === user && usr.password === pass);
+
+  console.log(`selected user is: ${req.user}`);
   next();
 }
 
+app.use(gateKeeper);
+
 app.get("/api/users/me", (req, res) => {
   if (req.user === undefined) {
-    return res.status(401).json({message: 'Must supply valid user credentials'});
+    return res.status(403).json({message: 'Must supply valid user credentials'});
   }
   const {firstName, lastName, id, userName, position} = req.user;
   return res.json({firstName, lastName, id, userName, position});
